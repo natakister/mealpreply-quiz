@@ -257,7 +257,7 @@ const QuizFunnel = () => {
       case 'welcome':
         return (
           <div className="text-center space-y-6">
-            <img src="/logo.png" alt="Meal Prep" className="w-9 h-9 mx-auto rounded-lg" />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Meal Prep" className="w-9 h-9 mx-auto rounded-lg" />
             <h1 className="quiz-title-main">{screen.title}</h1>
             <p className="quiz-subtitle">{screen.subtitle}</p>
             <WelcomeHero className="w-full" />

@@ -12,7 +12,7 @@ export default function WelcomeHero({ className = "" }) {
         }}
       >
         <img
-          src="/welcome-hero.png"
+          src={`${import.meta.env.BASE_URL}welcome-hero.png`}
           alt="Meal prep with family"
           className="w-full h-full object-cover"
         />
