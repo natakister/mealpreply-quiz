@@ -1,15 +1,15 @@
 // Quiz Funnel Data - Single Source of Truth
-// Изменения здесь автоматически отражаются и в квизе, и на странице структуры
+// Changes here are automatically reflected in both the quiz and the structure page
 
 export const phases = [
-  { id: 'engagement', name: 'ВОВЛЕЧЕНИЕ', color: 'bg-blue-500', colorHex: '#3B82F6' },
-  { id: 'context', name: 'КОНТЕКСТ', color: 'bg-cyan-500', colorHex: '#06B6D4' },
-  { id: 'reality', name: 'РЕАЛЬНОСТЬ', color: 'bg-amber-500', colorHex: '#F59E0B' },
-  { id: 'diagnosis', name: 'ДИАГНОСТИКА', color: 'bg-orange-500', colorHex: '#F97316' },
-  { id: 'insight', name: 'ИНСАЙТ', color: 'bg-pink-500', colorHex: '#EC4899' },
-  { id: 'solution', name: 'РЕШЕНИЕ', color: 'bg-emerald-500', colorHex: '#10B981' },
-  { id: 'conversion', name: 'КОНВЕРСИЯ', color: 'bg-green-500', colorHex: '#22C55E' },
-  { id: 'monetization', name: 'МОНЕТИЗАЦИЯ', color: 'bg-purple-500', colorHex: '#A855F7' }
+  { id: 'engagement', name: 'ENGAGEMENT', color: 'bg-blue-500', colorHex: '#3B82F6' },
+  { id: 'context', name: 'CONTEXT', color: 'bg-cyan-500', colorHex: '#06B6D4' },
+  { id: 'reality', name: 'REALITY', color: 'bg-amber-500', colorHex: '#F59E0B' },
+  { id: 'diagnosis', name: 'DIAGNOSIS', color: 'bg-orange-500', colorHex: '#F97316' },
+  { id: 'insight', name: 'INSIGHT', color: 'bg-pink-500', colorHex: '#EC4899' },
+  { id: 'solution', name: 'SOLUTION', color: 'bg-emerald-500', colorHex: '#10B981' },
+  { id: 'conversion', name: 'CONVERSION', color: 'bg-green-500', colorHex: '#22C55E' },
+  { id: 'monetization', name: 'MONETIZATION', color: 'bg-purple-500', colorHex: '#A855F7' }
 ];
 
 export const screens = [

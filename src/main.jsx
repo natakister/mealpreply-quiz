@@ -8,7 +8,7 @@ import './index.css'
 const App = () => {
   const path = window.location.pathname;
 
-  if (path === '/structure' || path === '/structure/') {
+  if (path.endsWith('/structure') || path.endsWith('/structure/')) {
     return <QuizStructure />;
   }
 

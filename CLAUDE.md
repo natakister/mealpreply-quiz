@@ -8,9 +8,19 @@ React SPA for meal planning quiz with 22 screens across 8 phases.
 - Tailwind CSS 4
 - npm
 
+## App Views
+
+The app has two views (both are deployed to GitHub):
+
+| View | URL | Description |
+|------|-----|-------------|
+| Quiz | `/` | Client-facing quiz funnel |
+| Structure | `/structure` | Internal overview of all screens, phases, and data |
+
 ## Project Structure
 
-- `src/components/` — React components (QuizFunnel.jsx is the main one)
+- `src/components/QuizFunnel.jsx` — Client-facing quiz
+- `src/components/QuizStructure.jsx` — Internal structure viewer
 - `src/data/quizData.js` — Single source of truth for all quiz data
 - `src/assets/fonts/` — Custom fonts (Inter, Platform)
 - `docs/` — Documentation (STRUCTURE.md, LOGIC.md, SCREENS.md)
@@ -24,7 +34,8 @@ React SPA for meal planning quiz with 22 screens across 8 phases.
 
 ## Key Files
 
-- `src/components/QuizFunnel.jsx` — Main quiz logic and state
+- `src/components/QuizFunnel.jsx` — Client quiz logic and state
+- `src/components/QuizStructure.jsx` — Structure viewer (internal)
 - `src/data/quizData.js` — All screens, phases, and dynamic content
 - `docs/LOGIC.md` — Conditional logic and calculations
 
