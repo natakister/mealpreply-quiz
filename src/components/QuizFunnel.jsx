@@ -1,8 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { screens } from '../data/quizData';
 import WelcomeHero from './WelcomeHero';
+import { getOrCreateSessionId, trackEventOnce } from '../lib/gsheetsTelemetry';
 
 const QuizFunnel = () => {
+  const sessionIdRef = useRef(null);
+  if (sessionIdRef.current === null) {
+    sessionIdRef.current = getOrCreateSessionId();
+  }
+  const sessionId = sessionIdRef.current;
+
   const [currentScreen, setCurrentScreen] = useState(0);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisStep, setAnalysisStep] = useState(0);
@@ -168,6 +175,20 @@ const QuizFunnel = () => {
   const visibleScreens = getVisibleScreens();
   const screen = visibleScreens[currentScreen];
   const progress = ((currentScreen) / (visibleScreens.length - 1)) * 100;
+
+  // Telemetry: send minimal events to Google Sheets (never blocks UI / logic)
+  useEffect(() => {
+    trackEventOnce(`quiz_start:${sessionId}`, 'quiz_start', { sessionId });
+  }, [sessionId]);
+
+  useEffect(() => {
+    if (!screen?.id) return;
+    trackEventOnce(`screen_view:${sessionId}:${screen.id}`, 'screen_view', {
+      sessionId,
+      screenId: screen.id,
+      screenIndex: currentScreen
+    });
+  }, [sessionId, screen?.id, currentScreen]);
 
   const handleAnswer = (field, value) => {
     setAnswers(prev => ({ ...prev, [field]: value }));
