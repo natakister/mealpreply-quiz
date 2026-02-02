@@ -10,6 +10,9 @@ const QuizFunnel = () => {
   }
   const sessionId = sessionIdRef.current;
 
+  // Telemetry-only: don't export default family size until user reaches and confirms that screen
+  const familySizeConfirmedRef = useRef(false);
+
   const [currentScreen, setCurrentScreen] = useState(0);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisStep, setAnalysisStep] = useState(0);
@@ -176,6 +179,24 @@ const QuizFunnel = () => {
   const screen = visibleScreens[currentScreen];
   const progress = ((currentScreen) / (visibleScreens.length - 1)) * 100;
 
+  const getTelemetryAnswers = () => {
+    const telemetryAnswers = { ...answers };
+    if (!familySizeConfirmedRef.current) {
+      telemetryAnswers.adults = null;
+      telemetryAnswers.kids = null;
+    }
+    return telemetryAnswers;
+  };
+
+  const confirmFamilySizeIfNeeded = () => {
+    if (familySizeConfirmedRef.current) return;
+    if (screen?.type !== 'number' || !Array.isArray(screen.fields)) return;
+    const fieldIds = screen.fields.map(f => f?.id).filter(Boolean);
+    if (fieldIds.includes('adults') || fieldIds.includes('kids')) {
+      familySizeConfirmedRef.current = true;
+    }
+  };
+
   // Telemetry: send minimal events to Google Sheets (never blocks UI / logic)
   useEffect(() => {
     trackEventOnce(`quiz_start:${sessionId}`, 'quiz_start', { sessionId });
@@ -186,7 +207,7 @@ const QuizFunnel = () => {
       sessionId,
       currentScreenId: screen?.id ?? '',
       currentScreenIndex: currentScreen,
-      answers
+      answers: getTelemetryAnswers()
     });
   }, [sessionId]);
 
@@ -225,11 +246,12 @@ const QuizFunnel = () => {
 
   const next = () => {
     if (currentScreen < visibleScreens.length - 1) {
+      confirmFamilySizeIfNeeded();
       trackEvent('user_snapshot', {
         sessionId,
         currentScreenId: screen?.id ?? '',
         currentScreenIndex: currentScreen,
-        answers
+        answers: getTelemetryAnswers()
       });
       setCurrentScreen(prev => prev + 1);
       setIsAnalyzing(false);
