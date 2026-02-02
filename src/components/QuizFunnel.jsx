@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { screens } from '../data/quizData';
 import WelcomeHero from './WelcomeHero';
-import { getOrCreateSessionId, trackEventOnce } from '../lib/gsheetsTelemetry';
+import { getOrCreateSessionId, trackEvent, trackEventOnce } from '../lib/gsheetsTelemetry';
 
 const QuizFunnel = () => {
   const sessionIdRef = useRef(null);
@@ -182,6 +182,15 @@ const QuizFunnel = () => {
   }, [sessionId]);
 
   useEffect(() => {
+    trackEventOnce(`user_init:${sessionId}`, 'user_snapshot', {
+      sessionId,
+      currentScreenId: screen?.id ?? '',
+      currentScreenIndex: currentScreen,
+      answers
+    });
+  }, [sessionId]);
+
+  useEffect(() => {
     if (!screen?.id) return;
     trackEventOnce(`screen_view:${sessionId}:${screen.id}`, 'screen_view', {
       sessionId,
@@ -216,6 +225,12 @@ const QuizFunnel = () => {
 
   const next = () => {
     if (currentScreen < visibleScreens.length - 1) {
+      trackEvent('user_snapshot', {
+        sessionId,
+        currentScreenId: screen?.id ?? '',
+        currentScreenIndex: currentScreen,
+        answers
+      });
       setCurrentScreen(prev => prev + 1);
       setIsAnalyzing(false);
       setAnalysisStep(0);
@@ -700,6 +715,16 @@ const QuizFunnel = () => {
         );
 
       case 'paywall':
+        const handleCheckoutInitiated = () => {
+          trackEvent('checkout_initiated', {
+            sessionId,
+            currentScreenId: screen?.id ?? '',
+            currentScreenIndex: currentScreen,
+            email: answers.email || ''
+          });
+          alert('Demo completed! 🎉');
+        };
+
         const withoutSystem = [
           { icon: '😰', text: 'Daily stress about what to cook' },
           { icon: '🥬', text: 'Food going bad in the fridge' },
@@ -751,7 +776,7 @@ const QuizFunnel = () => {
               <span>4.8 from 12,847 reviews</span>
             </div>
 
-            <button onClick={() => alert('Demo completed! 🎉')} className="quiz-btn shadow-lg">{screen.cta}</button>
+            <button onClick={handleCheckoutInitiated} className="quiz-btn shadow-lg">{screen.cta}</button>
           </div>
         );
 
