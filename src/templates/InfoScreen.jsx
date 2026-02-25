@@ -1,5 +1,6 @@
 import Button from '../components/atoms/Button'
 import { interpolate } from '../engine/computeVars'
+import { assetUrl } from '../utils/assetUrl'
 
 function resolveDynamic(dynamicDef, ctx) {
   if (!dynamicDef) return ''
@@ -45,12 +46,12 @@ function InsightVariant({ screen, ctx }) {
 
       {screen.socialProofBadge && (
         <div className="flex items-center justify-center gap-2 py-4 animate-in delay-3">
-          <img src="/laurel_l.png" alt="" className="w-6 h-6 object-contain" />
+          <img src={assetUrl('/laurel_l.png')} alt="" className="w-6 h-6 object-contain" />
           <div className="text-center">
             <p className="text-small font-bold tracking-wider uppercase text-dark">{screen.socialProofBadge.title}</p>
             <p className="text-small text-grey">{screen.socialProofBadge.text}</p>
           </div>
-          <img src="/laurel_r.png" alt="" className="w-6 h-6 object-contain" />
+          <img src={assetUrl('/laurel_r.png')} alt="" className="w-6 h-6 object-contain" />
         </div>
       )}
     </>
@@ -138,12 +139,12 @@ function ValueDemoVariant({ screen, ctx }) {
 
       {screen.socialProofBadge && (
         <div className="flex items-center justify-center gap-2 py-4 animate-in delay-3">
-          <img src="/laurel_l.png" alt="" className="w-6 h-6 object-contain" />
+          <img src={assetUrl('/laurel_l.png')} alt="" className="w-6 h-6 object-contain" />
           <div className="text-center">
             <p className="text-small font-bold tracking-wider uppercase text-dark">{screen.socialProofBadge.title}</p>
             <p className="text-small text-grey">{screen.socialProofBadge.text}</p>
           </div>
-          <img src="/laurel_r.png" alt="" className="w-6 h-6 object-contain" />
+          <img src={assetUrl('/laurel_r.png')} alt="" className="w-6 h-6 object-contain" />
         </div>
       )}
     </>

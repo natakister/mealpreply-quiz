@@ -24,6 +24,7 @@
 import Button from '../components/atoms/Button'
 import TextInput from '../components/atoms/TextInput'
 import { interpolate } from '../engine/computeVars'
+import { assetUrl } from '../utils/assetUrl'
 
 function EmailVariant({ screen, ctx, answer, onSelect }) {
   return (
@@ -60,12 +61,12 @@ function EmailVariant({ screen, ctx, answer, onSelect }) {
 
       {screen.socialProofBadge && (
         <div className="flex items-center justify-center gap-2 py-2 animate-in delay-3">
-          <img src="/laurel_l.png" alt="" className="w-6 h-6 object-contain" />
+          <img src={assetUrl('/laurel_l.png')} alt="" className="w-6 h-6 object-contain" />
           <div className="text-center">
             <p className="text-small font-bold tracking-wider uppercase text-dark">{screen.socialProofBadge.title}</p>
             <p className="text-small text-grey">{screen.socialProofBadge.text}</p>
           </div>
-          <img src="/laurel_r.png" alt="" className="w-6 h-6 object-contain" />
+          <img src={assetUrl('/laurel_r.png')} alt="" className="w-6 h-6 object-contain" />
         </div>
       )}
     </>

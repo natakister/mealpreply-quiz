@@ -4,6 +4,7 @@ import CheckItem from '../components/atoms/CheckItem'
 import SocialProofBadge from '../components/molecules/SocialProofBadge'
 import Button from '../components/atoms/Button'
 import { interpolate } from '../engine/computeVars'
+import { assetUrl } from '../utils/assetUrl'
 
 export default function WelcomeScreen({ screen, ctx = {}, onNext }) {
   return (
@@ -18,7 +19,7 @@ export default function WelcomeScreen({ screen, ctx = {}, onNext }) {
 
       {/* Hero: two photos with stickers — pre-composed single image */}
       <div className="-mx-5 animate-in delay-2">
-        <img src={screen.heroImage || '/welcome-hero.png'} alt="" className="w-full" style={{ aspectRatio: '448/244' }} />
+        <img src={assetUrl(screen.heroImage || '/welcome-hero.png')} alt="" className="w-full" style={{ aspectRatio: '448/244' }} />
       </div>
 
       {screen.bullets && (
