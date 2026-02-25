@@ -824,10 +824,8 @@ function buildSegTabs() {
 }
 
 // ── Init: fetch quiz data at runtime ──
-const VITE_DEV = 'http://localhost:3002';
-
 async function init() {
-  const urls = ['/quiz-data.json', VITE_DEV + '/quiz-data.json'];
+  const urls = ['quiz-data.json', './quiz-data.json'];
   for (const url of urls) {
     try {
       const resp = await fetch(url);
