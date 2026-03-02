@@ -524,7 +524,7 @@ function fmtVars(t) {
 }
 
 function screenLink(id) {
-  const base = location.protocol === 'file:' ? VITE_DEV : '';
+  const base = location.pathname.replace(/\/[^/]*$/, '');
   return `${base}/?screen=${id}&segment=${seg}`;
 }
 
